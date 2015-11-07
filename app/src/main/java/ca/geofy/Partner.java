@@ -1,4 +1,4 @@
-package rampupweekend8.coffeenews;
+package ca.geofy;
 
 /**
  * Created by Doug on 06/11/2015.

@@ -1,4 +1,4 @@
-package rampupweekend8.coffeenews;
+package ca.geofy;
 
 import org.junit.Test;
 

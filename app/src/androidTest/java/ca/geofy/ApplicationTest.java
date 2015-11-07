@@ -1,4 +1,4 @@
-package rampupweekend8.coffeenews;
+package ca.geofy;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

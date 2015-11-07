@@ -1,4 +1,4 @@
-package rampupweekend8.coffeenews;
+package ca.geofy;
 
 import android.content.DialogInterface;
 import android.location.Location;
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             showNotAtPartnerDialog();
         }
 
-        CoffeeNewsActivity.showContentForPartner(this, partner.id, edition);
+        LocationLandingActivity.showContentForPartner(this, partner.id, edition);
     }
 
     private void showInvalidCodeDialog() {

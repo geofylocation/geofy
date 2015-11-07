@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Coffee News</string>
+    <string name="app_name">Geofy</string>
 
-    <string name="title_activity_coffee_news">Coffee News Content</string>
+    <string name="title_activity_coffee_news">Geofy</string>
     <string name="partner_location_header">You are at %s</string>
 
     <string name="action_settings">Settings</string>

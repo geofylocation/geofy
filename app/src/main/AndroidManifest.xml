@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="rampupweekend8.coffeenews">
+    package="ca.geofy">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"
+            android:name="ca.geofy.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".CoffeeNewsActivity"
+            android:name="ca.geofy.LocationLandingActivity"
             android:label="@string/title_activity_coffee_news"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

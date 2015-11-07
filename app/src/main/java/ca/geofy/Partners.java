@@ -1,4 +1,4 @@
-package rampupweekend8.coffeenews;
+package ca.geofy;
 
 import android.location.Location;
 

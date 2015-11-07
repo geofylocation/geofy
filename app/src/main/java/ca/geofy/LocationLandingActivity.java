@@ -1,18 +1,17 @@
-package rampupweekend8.coffeenews;
+package ca.geofy;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.method.LinkMovementMethod;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CoffeeNewsActivity extends AppCompatActivity {
+public class LocationLandingActivity extends AppCompatActivity {
 
     private static final String EXTRA_PARTNER_ID = "rampupweekend8.coffeenews.PARTNER_ID";
     private static final String EXTRA_EDITION = "rampupweekend8.coffeenews.EDITION";
@@ -26,7 +25,7 @@ public class CoffeeNewsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coffee_news);
+        setContentView(R.layout.activity_location_landing);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,7 +53,7 @@ public class CoffeeNewsActivity extends AppCompatActivity {
     }
 
     public static void showContentForPartner(Activity activity, long partnerId, String edition) {
-        Intent startIntent = new Intent(activity, CoffeeNewsActivity.class);
+        Intent startIntent = new Intent(activity, LocationLandingActivity.class);
         startIntent.putExtra(EXTRA_PARTNER_ID, partnerId);
         startIntent.putExtra(EXTRA_EDITION, edition);
         activity.startActivity(startIntent);
