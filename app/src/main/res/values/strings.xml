@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Coffee News</string>
+    <string name="action_settings">Settings</string>
+    <string name="code_not_recognized_title">Invalid Code</string>
+    <string name="code_not_recognized_message">Please scan only codes appearing in your issue of Coffee News</string>
+    <string name="code_try_again">Try Again</string>
+    <string name="title_activity_coffee_news">CoffeeNewsActivity</string>
+    <string name="enable_location_services_title">Location Services</string>
+    <string name="enable_location_services_message">We need your current location to show you relevant content. Please enable data and location services and try again.</string>
+    <string name="okay">Okay</string>
+    <string name="not_at_partner_location_title">Invalid Location</string>
+    <string name="not_at_partner_location_message">Please bring this copy of Coffee News to any of our partnering locations and try scanning it again.</string>
+    <string name="partner_location_header">You are at %s</string>
+    <string name="edtion_2_main_cover">
+        <p>Extra Trivia Questions!</p>
+        <dl>
+          <dt><b>Q:</b> Who first landed on the moon?</dt>
+          <dd><b>A:</b> Neil Armstrong</dd>
+          <dt><b>Q:</b> How much wood would a woodchuck chuck if a woodchuck could chuck wood?</dt>
+          <dd><b>A:</b> This isn\'t a question, this is a stupid joke!</dd>
+        </dl>
+    </string>
+    <string name="edition_1_male_chorus">
+        The <a href="http://winnipegmalechorus.org/">Winnipeg Male Chorus</a> is seeking to attract new <b>Bass, Baritone, etc.</b> etc. etc.
+    </string>
+    <string name="call_to_action">Scan your copy of Coffee News for trivia, prizes, and more!</string>
+</resources>

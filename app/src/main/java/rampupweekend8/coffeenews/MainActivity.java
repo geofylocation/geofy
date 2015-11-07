@@ -1,0 +1,179 @@
+package rampupweekend8.coffeenews;
+
+import android.content.DialogInterface;
+import android.location.Location;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import eu.livotov.labs.android.camview.ScannerLiveView;
+
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ScannerLiveView.ScannerViewEventListener {
+
+    private static Pattern URL_PATTERN = Pattern.compile("http://rampupweekend.com/coffeenews\\?edition=(.+)");
+
+    @Bind(R.id.code_scanner)
+    ScannerLiveView scanner;
+
+    private GoogleApiClient googleApi;
+    private Location lastLocation;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ButterKnife.bind(this);
+
+        scanner.setPlaySound(true);
+        googleApi = createGoogleLocationServicesApi();
+
+    }
+
+    private GoogleApiClient createGoogleLocationServicesApi() {
+        return new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+    // Google Play Services
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApi);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        // TODO
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        // TODO
+    }
+
+    // Code Scanner
+
+    @Override
+    public void onScannerStarted(ScannerLiveView scanner) {
+    }
+
+    @Override
+    public void onScannerStopped(ScannerLiveView scanner) {
+    }
+
+    @Override
+    public void onScannerError(Throwable err) {
+        Log.w("MainActivity", "Exception from scanner", err);
+    }
+
+    @Override
+    public void onCodeScanned(String data) {
+        onQrCodeScanned(data);
+    }
+
+    private void onQrCodeScanned(String data) {
+        Matcher matcher = URL_PATTERN.matcher(data);
+        if (!matcher.matches()) {
+            showInvalidCodeDialog();
+        } else {
+            String edition = matcher.group(1);
+            tryShowContentForEdition(edition);
+        }
+    }
+
+    private void tryShowContentForEdition(String edition) {
+        if (lastLocation == null) {
+            showNoLocationDialog();
+            return;
+        }
+
+        Partner partner = Partners.getPartnerAtLocation(lastLocation.getLatitude(), lastLocation.getLongitude());
+        if (partner == null) {
+            showNotAtPartnerDialog();
+        }
+
+        CoffeeNewsActivity.showContentForPartner(this, partner.id, edition);
+    }
+
+    private void showInvalidCodeDialog() {
+        showInfoDialog(R.string.code_not_recognized_title, R.string.code_not_recognized_message, R.string.code_try_again);
+    }
+
+    private void showNoLocationDialog() {
+        showInfoDialog(R.string.enable_location_services_title, R.string.enable_location_services_message, R.string.okay);
+    }
+
+    private void showNotAtPartnerDialog() {
+        showInfoDialog(R.string.not_at_partner_location_title, R.string.not_at_partner_location_message, R.string.okay);
+    }
+
+    private void showInfoDialog(final int resTitle, final int resMessage, final int resButton) {
+        new AlertDialog.Builder(this)
+                .setTitle(resTitle)
+                .setMessage(resMessage)
+                .setPositiveButton(resButton, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(true)
+                .create()
+                .show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        scanner.setScannerViewEventListener(this);
+        scanner.startScanner();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        scanner.stopScanner();
+        scanner.setScannerViewEventListener(null);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
