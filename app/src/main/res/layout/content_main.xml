@@ -23,15 +23,12 @@
             android:text="@string/call_to_action"
             style="@style/TextAppearance.AppCompat.Large"/>
 
-        <eu.livotov.labs.android.camview.ScannerLiveView
+        <me.dm7.barcodescanner.zxing.ZXingScannerView
             android:id="@+id/code_scanner"
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            />
+            android:layout_height="match_parent"
+            android:padding="@dimen/abc_control_padding_material"/>
 
     </LinearLayout>
-
-
 
 </RelativeLayout>

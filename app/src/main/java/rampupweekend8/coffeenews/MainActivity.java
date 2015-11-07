@@ -6,27 +6,29 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import eu.livotov.labs.android.camview.ScannerLiveView;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ScannerLiveView.ScannerViewEventListener {
+public class MainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static Pattern URL_PATTERN = Pattern.compile("http://rampupweekend.com/coffeenews\\?edition=(.+)");
 
     @Bind(R.id.code_scanner)
-    ScannerLiveView scanner;
+    ZXingScannerView scanner;
 
     private GoogleApiClient googleApi;
     private Location lastLocation;
@@ -40,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         ButterKnife.bind(this);
 
-        scanner.setPlaySound(true);
         googleApi = createGoogleLocationServicesApi();
-
+        googleApi.connect();
+        scanner.setFormats(Arrays.asList(BarcodeFormat.QR_CODE));
     }
 
     private GoogleApiClient createGoogleLocationServicesApi() {
@@ -67,37 +69,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        // TODO
-    }
-
-    // Code Scanner
-
-    @Override
-    public void onScannerStarted(ScannerLiveView scanner) {
+        // what does this mean? it seems bad
     }
 
     @Override
-    public void onScannerStopped(ScannerLiveView scanner) {
-    }
-
-    @Override
-    public void onScannerError(Throwable err) {
-        Log.w("MainActivity", "Exception from scanner", err);
-    }
-
-    @Override
-    public void onCodeScanned(String data) {
-        onQrCodeScanned(data);
-    }
-
-    private void onQrCodeScanned(String data) {
-        Matcher matcher = URL_PATTERN.matcher(data);
+    public void handleResult(Result result) {
+        Matcher matcher = URL_PATTERN.matcher(result.getText());
         if (!matcher.matches()) {
             showInvalidCodeDialog();
         } else {
             String edition = matcher.group(1);
             tryShowContentForEdition(edition);
         }
+        result.getText();
     }
 
     private void tryShowContentForEdition(String edition) {
@@ -144,15 +128,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     @Override
     protected void onResume() {
         super.onResume();
-        scanner.setScannerViewEventListener(this);
-        scanner.startScanner();
+        scanner.setResultHandler(this);
+        scanner.startCamera();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        scanner.stopScanner();
-        scanner.setScannerViewEventListener(null);
+        scanner.stopCamera();
     }
 
     @Override

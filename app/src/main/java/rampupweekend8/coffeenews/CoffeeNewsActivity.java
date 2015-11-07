@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -19,8 +20,8 @@ public class CoffeeNewsActivity extends AppCompatActivity {
     @Bind(R.id.text_partner)
     TextView textPartner;
 
-    @Bind(R.id.text_edition)
-    TextView textEdition;
+    @Bind(R.id.webview_edition)
+    WebView webViewEdition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,13 @@ public class CoffeeNewsActivity extends AppCompatActivity {
         Partner partner = getPartner();
         textPartner.setText(getResources().getString(R.string.partner_location_header, partner.description));
 
-        // TODO: ugly!
+        // TODO: ugly hardcoding!
         switch (getEdition()) {
             case "1": // Winnipeg Male Chorus
-                textEdition.setText(Html.fromHtml(getResources().getString(R.string.edition_1_male_chorus)));
+                webViewEdition.loadData(getResources().getString(R.string.edition_1_male_chorus), "text/html", null);
                 break;
             case "2": // Main Cover
-                textEdition.setText(Html.fromHtml(getResources().getString(R.string.edtion_2_main_cover)));
+                webViewEdition.loadData(getResources().getString(R.string.edition_2_main_cover), "text/html", null);
                 break;
         }
     }
