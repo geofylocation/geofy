@@ -7,6 +7,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -60,9 +62,12 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private void showNotification() {
         PendingIntent scan = PendingIntent.getActivity(this, 1, new Intent(this, MainActivity.class), 0);
 
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_stat_geogy_icon);
+
         Notification notification = new NotificationCompat.Builder(this)
                 .setContentTitle(getResources().getString(R.string.app_name))
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(largeIcon)
+                .setSmallIcon(R.drawable.ic_stat_geogy_icon)
                 .setContentText("You are in a Coffee News location.")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("You are in a Coffee News location. Play for a chance to win!"))
                 .setContentIntent(scan)
