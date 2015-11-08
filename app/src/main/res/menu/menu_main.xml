@@ -5,6 +5,7 @@
 
     <item
         android:actionLayout="@layout/geofy_header"
-        android:showAsAction="ifRoom"/>
+        android:showAsAction="always"
+        android:title="Geofy"/>
 
 </menu>

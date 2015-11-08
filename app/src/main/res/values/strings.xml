@@ -31,7 +31,7 @@
     <string name="edition_1_male_chorus"><![CDATA[
         The <a href="http://winnipegmalechorus.org/">Winnipeg Male Chorus</a> is seeking to attract new <b>Bass, Baritone, etc.</b> etc. etc.
     ]]></string>
-    <string name="call_to_action">Scan your copy of Coffee News for trivia, prizes, and more!</string>
+    <string name="call_to_action">Scan your copy of Coffee News </string>
     <string name="scan_code">Scan QR Code</string>
     <string name="title_activity_game_selector">Play to Win!</string>
     <string name="loss_dialog_title">OH NO!</string>

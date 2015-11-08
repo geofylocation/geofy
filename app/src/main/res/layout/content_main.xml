@@ -18,9 +18,11 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/call_to_action"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
             style="@style/TextAppearance.AppCompat.Large"/>
 
         <ca.geofy.ZXingScannerViewFixed
