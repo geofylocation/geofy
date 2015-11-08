@@ -1,16 +1,7 @@
 package ca.geofy;
 
-import android.app.LauncherActivity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -23,7 +14,6 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
 import java.util.Arrays;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import butterknife.Bind;
@@ -81,44 +71,11 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result result) {
-        Matcher matcher = URL_PATTERN.matcher(result.getText());
-        if (!matcher.matches()) {
-            showInvalidCodeDialog();
-        } else {
-            String edition = matcher.group(1);
-            tryShowContentForEdition(edition);
-        }
-        result.getText();
+        tryShowContentForEdition("1");
     }
 
     private void tryShowContentForEdition(String edition) {
-        if (!hasLocation()) {
-            showNoLocationDialog();
-            return;
-        }
-
-        Partner partner = Partners.PARTNERS[1];
-        if (partner == null) {
-            showNotAtPartnerDialog();
-        }
-
-        LocationLandingActivity.showContentForPartner(this, partner.id, edition);
-    }
-
-    private boolean hasLocation() {
-        return true;
-    }
-
-    private void showInvalidCodeDialog() {
-        DialogUtil.showInfoDialog(this, R.string.code_not_recognized_title, R.string.code_not_recognized_message, R.string.code_try_again);
-    }
-
-    private void showNoLocationDialog() {
-        DialogUtil.showInfoDialog(this, R.string.enable_location_services_title, R.string.enable_location_services_message, R.string.okay);
-    }
-
-    private void showNotAtPartnerDialog() {
-        DialogUtil.showInfoDialog(this, R.string.not_at_partner_location_title, R.string.not_at_partner_location_message, R.string.okay);
+        LocationLandingActivity.show(this);
     }
 
     @Override
@@ -139,20 +96,5 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Here's your code:"
+        android:textSize="24sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -18,6 +19,7 @@
         android:layout_gravity="center_horizontal"
         android:textAlignment="center"
         android:text="X9074"
+        android:textSize="48sp"
         android:background="@drawable/redeem_border"
         android:textColor="@color/primary_dark_material_dark" />
 
@@ -25,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Show to the cashier when you pay."
+        android:textSize="24sp"
         android:textAlignment="center"/>
 
 </LinearLayout>

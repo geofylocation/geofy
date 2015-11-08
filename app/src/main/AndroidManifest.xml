@@ -23,9 +23,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
         <activity
             android:name=".LocationLandingActivity"
             android:label="@string/title_activity_coffee_news"
+            android:launchMode="singleTop"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -42,11 +44,13 @@
 
         <activity
             android:name=".GameSelectorActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_game_selector" />
 
         <activity
             android:name=".SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_splash"
             android:theme="@style/FullscreenTheme"
             android:launchMode="singleTop"
@@ -60,8 +64,18 @@
         </activity>
 
         <activity
+            android:name=".WinActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_splash"
+            android:theme="@style/FullscreenTheme"
+            android:launchMode="singleTop"
+            android:noHistory="true" />
+
+        <activity
             android:name=".ConcludingActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_splash"
             android:theme="@style/FullscreenTheme"
             android:launchMode="singleTop"
