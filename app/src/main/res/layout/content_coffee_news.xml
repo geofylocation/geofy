@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:scaleType="centerInside"
-                android:background="@mipmap/ic_launcher"
+                android:background="@mipmap/ad1"
                 android:layout_alignParentTop="true"/>
 
             <com.winsontan520.WScratchView
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_alignParentTop="true"
-                app:scratchDrawable="@mipmap/ad_scratcher_1"
+                app:scratchDrawable="@mipmap/overlay"
                 app:revealSize="32dp"/>
 
             <TextView

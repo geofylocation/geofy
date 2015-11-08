@@ -63,9 +63,9 @@ public class LocationLandingActivity extends AppCompatActivity {
 
     private void resetScratcher() {
         if (attempts == 1) {
-            scratcher.setScratchDrawable(getResources().getDrawable(R.mipmap.ad_scratcher_2));
+            underlay.setBackground(getResources().getDrawable(R.mipmap.ad2));
         } else if (attempts == 2) {
-            scratcher.setScratchDrawable(getResources().getDrawable(R.mipmap.ad_scratcher_3));
+            underlay.setBackground(getResources().getDrawable(R.mipmap.ad3));
         } else {
             showMaximumHitDialog();
         }
