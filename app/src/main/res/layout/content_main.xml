@@ -23,7 +23,7 @@
             android:text="@string/call_to_action"
             style="@style/TextAppearance.AppCompat.Large"/>
 
-        <me.dm7.barcodescanner.zxing.ZXingScannerView
+        <ca.geofy.ZXingScannerViewFixed
             android:id="@+id/code_scanner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

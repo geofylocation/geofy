@@ -9,9 +9,9 @@ public class Partners {
 
     private static final float THRESHOLD_METERS = 25;
 
-    private static Partner[] PARTNERS = new Partner[] {
+    public static Partner[] PARTNERS = new Partner[] {
         new Partner(49.85984, -97.12605, "Doug's House"),
-        new Partner(49.80319, -97.14977, "One Innovation Drive"),
+        new Partner(49.80319, -97.14977, "Mom's Bistro"),
 
     };
 
