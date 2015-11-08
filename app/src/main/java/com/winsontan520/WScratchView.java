@@ -174,8 +174,8 @@ public class WScratchView extends SurfaceView implements IWScratchView, SurfaceH
 	}
 
 	private void updateScratchedPercentage() {
-		if(mOnScratchCallback == null) return;
-		mOnScratchCallback.onScratch(getScratchedRatio());
+		//if(mOnScratchCallback == null) return;
+		//mOnScratchCallback.onScratch(getScratchedRatio());
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public class WScratchView extends SurfaceView implements IWScratchView, SurfaceH
 			case MotionEvent.ACTION_UP:
                 //Set call back if user's finger detach
                 if(mOnScratchCallback != null){
-                        mOnScratchCallback.onDetach(true);	
+                        mOnScratchCallback.onDetach(getScratchedRatio());
                 }
                 //perform Click action if the motion is not move
                 //and the WScratchView is clickable
@@ -386,9 +386,9 @@ public class WScratchView extends SurfaceView implements IWScratchView, SurfaceH
 	}
 	
 	public static abstract class OnScratchCallback{
-		public abstract void onScratch(float percentage);
+		//public abstract void onScratch(float percentage);
         //Call back funtion to monitor the status of finger
-        public abstract void onDetach(boolean fingerDetach);
+        public abstract void onDetach(float percentage);
 	}
 
     //Set the mClearCanvas

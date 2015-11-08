@@ -29,8 +29,6 @@ public class LocationLandingActivity extends AppCompatActivity {
     @Bind(R.id.underlay)
     ImageView underlay;
 
-    float lastPercentage;
-
     private int attempts = 0;
 
     @Override
@@ -46,13 +44,8 @@ public class LocationLandingActivity extends AppCompatActivity {
         scratcher.setOnScratchCallback(new WScratchView.OnScratchCallback() {
 
             @Override
-            public void onScratch(float percentage) {
-                lastPercentage = percentage;
-            }
-
-            @Override
-            public void onDetach(boolean fingerDetach) {
-                if (lastPercentage >= 65) {
+            public void onDetach(float percentageRevealed) {
+                if (percentageRevealed >= 65) {
                     onRevealed();
                 }
             }
@@ -69,8 +62,6 @@ public class LocationLandingActivity extends AppCompatActivity {
     }
 
     private void resetScratcher() {
-        lastPercentage = 0;
-
         if (attempts == 1) {
             scratcher.setScratchDrawable(getResources().getDrawable(R.mipmap.ad_scratcher_2));
         } else if (attempts == 2) {

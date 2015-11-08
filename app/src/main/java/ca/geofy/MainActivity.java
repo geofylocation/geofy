@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         Notification notification = new NotificationCompat.Builder(this)
                 .setContentTitle(getResources().getString(R.string.app_name))
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentText("You are in a Coffee News location. Scan for a chance to win!")
+                .setContentText("You are in a Coffee News location.")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("You are in a Coffee News location. Play for a chance to win!"))
                 .setContentIntent(scan)
                 .build();
 
