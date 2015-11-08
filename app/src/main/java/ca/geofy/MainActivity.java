@@ -62,12 +62,15 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private void showNotification() {
         PendingIntent scan = PendingIntent.getActivity(this, 1, new Intent(this, MainActivity.class), 0);
 
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_stat_geogy_icon);
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.geofy_large_notification_icon);
+
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        //opts.
 
         Notification notification = new NotificationCompat.Builder(this)
                 .setContentTitle(getResources().getString(R.string.app_name))
                 .setLargeIcon(largeIcon)
-                .setSmallIcon(R.drawable.ic_stat_geogy_icon)
+                .setSmallIcon(R.drawable.geofy_small_notification_icon)
                 .setContentText("You are in a Coffee News location.")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("You are in a Coffee News location. Play for a chance to win!"))
                 .setContentIntent(scan)
