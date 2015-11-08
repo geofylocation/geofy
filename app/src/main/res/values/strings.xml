@@ -34,7 +34,7 @@
     <string name="call_to_action">Scan your copy of Coffee News for trivia, prizes, and more!</string>
     <string name="scan_code">Scan QR Code</string>
     <string name="title_activity_game_selector">Play to Win!</string>
-    <string name="loss_dialog_title">OH NO<!---->!</string>
+    <string name="loss_dialog_title">OH NO!</string>
     <string name="loss_dialog_message">You didn\'t win this time.</string>
     <string name="loss_dialog_retry">Try Again</string>
     <string name="win_dialog_title">WINNER!</string>
@@ -45,4 +45,8 @@
     <string name="max_dialog_ok">Okay</string>
     <string name="max_dialog_message">You\'ve reached the maximum plays at this time. Come back tomorrow for more deals!</string>
     <string name="max_dialog_title">Darn!</string>
+
+    <string name="title_activity_splash">Geofy</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

@@ -1,12 +1,14 @@
 package ca.geofy;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ public class LocationLandingActivity extends AppCompatActivity {
     @Bind(R.id.underlay)
     ImageView underlay;
 
-    private int attempts = 0;
+    private int attempts = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,13 @@ public class LocationLandingActivity extends AppCompatActivity {
         scratcher.invalidate();
     }
 
+    private void showThanksScreen() {
+        Intent concluding = new Intent(this, ConcludingActivity.class);
+        startActivity(concluding);
+
+        overridePendingTransition(R.anim.abc_fade_in, 0);
+    }
+
     private void showMaximumHitDialog() {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.max_dialog_title)
@@ -82,7 +91,7 @@ public class LocationLandingActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.max_dialog_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        showThanksScreen();
                     }
                 })
                 .setCancelable(false)
@@ -121,18 +130,25 @@ public class LocationLandingActivity extends AppCompatActivity {
     }
 
     private void onLoss() {
-        new AlertDialog.Builder(this)
+
+        View loss = getLayoutInflater().inflate(R.layout.dialog_loss, null);
+
+        final Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.loss_dialog_title)
                 .setMessage(R.string.loss_dialog_message)
-                .setPositiveButton(R.string.loss_dialog_retry, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        resetScratcher();
-                    }
-                })
+                .setView(loss)
                 .setCancelable(false)
-                .create()
-                .show();
+                .create();
+
+        loss.findViewById(R.id.loss_ok).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+                resetScratcher();
+            }
+        });
+
+        dialog.show();
     }
 
     private Partner getPartner() {
